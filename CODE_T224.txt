@@ -1,0 +1,155 @@
+#include <iostream>
+#include <map>
+#include <vector>
+#include <string>
+using namespace std;
+
+map<string, vector<string>> studentCourses;
+map<string, string> aiCareerSuggestions;
+map<string, string> badges;
+map<string, string> apprenticeshipPortal;
+
+void initializeData() {
+    aiCareerSuggestions["coding"] = "Web Development";
+    aiCareerSuggestions["data"] = "AI & Data Science";
+    aiCareerSuggestions["wiring"] = "Electrician";
+    aiCareerSuggestions["health"] = "Healthcare Assistant";
+
+    badges["Web Development"] = "HTML & CSS Badge";
+    badges["Electrician"] = "Wiring Expert Badge";
+    badges["AI & Data Science"] = "Python Analyst Badge";
+
+    apprenticeshipPortal["Web Development"] = "Frontend Intern at CodeLabs";
+    apprenticeshipPortal["Electrician"] = "Electrician Apprentice at PowerCorp";
+    apprenticeshipPortal["AI & Data Science"] = "AI Intern at DataVerse";
+}
+
+void registerStudent() {
+    cout << "Enter Student Name: ";
+    string name;
+    cin >> ws;
+    getline(cin, name);
+
+    cout << "Available Courses: Web Development, Electrician, AI & Data Science, Healthcare Assistant" << endl;
+    cout << "Choose a course: ";
+    string course;
+    cin >> ws;
+    getline(cin, course);
+
+    studentCourses[name].push_back(course);
+    cout << name << " registered successfully for " << course << "!" << endl;
+}
+
+void aiCareerGuidance() {
+    cout << "Enter your interest keyword (e.g., coding, data, health): ";
+    string keyword;
+    cin >> ws;
+    getline(cin, keyword);
+
+    string suggestion = aiCareerSuggestions.count(keyword) ? aiCareerSuggestions[keyword] : "General Vocational Training";
+    cout << "AI Suggests: You may be interested in " << suggestion << endl;
+}
+
+void simulateVRModule() {
+    cout << "🔁 Launching Virtual Reality Module..." << endl;
+    cout << "🧰 Simulating real-world scenario for hands-on experience..." << endl;
+    cout << "✅ You successfully completed the VR training module!" << endl;
+}
+
+void earnBadge() {
+    cout << "Enter Student Name: ";
+    string name;
+    cin >> ws;
+    getline(cin, name);
+
+    if (studentCourses.count(name) == 0) {
+        cout << "Student not found. Please register first." << endl;
+        return;
+    }
+
+    cout << "Your Courses: ";
+    for (const string &course : studentCourses[name]) {
+        cout << course << " ";
+    }
+    cout << endl;
+
+    cout << "Enter completed course name: ";
+    string course;
+    cin >> ws;
+    getline(cin, course);
+
+    if (badges.count(course)) {
+        cout << "🏅 Congrats " << name << "! You've earned: " << badges[course] << endl;
+    } else {
+        cout << "❌ No badge found for the selected course." << endl;
+    }
+}
+
+void showApprenticeships() {
+    cout << "Enter course name to view opportunities: ";
+    string course;
+    cin >> ws;
+    getline(cin, course);
+
+    if (apprenticeshipPortal.count(course)) {
+        cout << "🔗 Apprenticeship Opportunity: " << apprenticeshipPortal[course] << endl;
+    } else {
+        cout << "❌ No current apprenticeships available for " << course << endl;
+    }
+}
+
+void deployMobileLab() {
+    cout << "Enter remote region name: ";
+    string location;
+    cin >> ws;
+    getline(cin, location);
+    cout << "🚐 Mobile Training Lab dispatched to " << location << "." << endl;
+    cout << "🎓 Vocational training now accessible in this region." << endl;
+}
+
+int main() {
+    cout << "=== Welcome to NEP 2020 Vocational Training Portal ===" << endl;
+
+    initializeData();
+
+    while (true) {
+        cout << "\nMenu:" << endl;
+        cout << "1. Register for a Vocational Course" << endl;
+        cout << "2. AI-Powered Career Guidance" << endl;
+        cout << "3. Simulate Virtual Training (VR Module)" << endl;
+        cout << "4. Earn Digital Skill Badge" << endl;
+        cout << "5. Access Apprenticeship Opportunities" << endl;
+        cout << "6. Deploy Mobile Training Lab (Simulated)" << endl;
+        cout << "7. Exit" << endl;
+        cout << "Choose an option: ";
+
+        int choice;
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                registerStudent();
+                break;
+            case 2:
+                aiCareerGuidance();
+                break;
+            case 3:
+                simulateVRModule();
+                break;
+            case 4:
+                earnBadge();
+                break;
+            case 5:
+                showApprenticeships();
+                break;
+            case 6:
+                deployMobileLab();
+                break;
+            case 7:
+                cout << "Thank you for using the NEP 2020 Vocational Platform!" << endl;
+                return 0;
+            default:
+                cout << "Invalid choice. Try again." << endl;
+        }
+    }
+}
